@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-import org.springframework.util.ClassUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -44,7 +43,7 @@ public class AccessingDataPgApplication {
 
         String driverClassName = DatabaseDriver.fromJdbcUrl(dbUrl).getDriverClassName();
         
-        HikariDataSource dataSource = DataSourceBuilder.create(ClassUtils.getDefaultClassLoader())
+        HikariDataSource dataSource = DataSourceBuilder.create()
             .type(HikariDataSource.class)
             .driverClassName(driverClassName)
             .url(dbUrl)
