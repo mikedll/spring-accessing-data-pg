@@ -16,12 +16,6 @@ public class MyTool {
 
     @Autowired
     private ExoticAnimal exoticAnimal;
-
-    public MyTool() {
-        if(animal == null) {
-            System.out.println("Animal is null in MyTool constructor");
-        }
-    }
     
     public void run() {
         System.out.println("Called hello on animal and got: " + animal.hello());

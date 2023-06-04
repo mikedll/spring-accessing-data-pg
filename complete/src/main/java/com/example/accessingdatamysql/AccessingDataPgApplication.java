@@ -20,15 +20,6 @@ public class AccessingDataPgApplication {
 
       MyTool t = appCtx.getBean(MyTool.class);
       t.run();
-
-      t = appCtx.getBean(MyTool.class);
-      t.run();
-      
-      ExoticAnimal ea = (ExoticAnimal)appCtx.getBean("exoticAnimal");
-      ExoticAnimal ea2 = (ExoticAnimal)appCtx.getBean("exoticAnimal");
-      if(ea == ea2) {
-          System.out.println("Got the same exotic animal");
-      }
-      
+            
 	}
 }
