@@ -1,5 +1,7 @@
 package com.example.accessingdatamysql;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class AccessingDataPgApplication {
     
     public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+
         // SpringApplication.run(AccessingDataPgApplication.class, args);
 
         AnnotationConfigApplicationContext appCtx = new AnnotationConfigApplicationContext(AccessingDataPgApplication.class);
@@ -18,7 +22,7 @@ public class AccessingDataPgApplication {
             System.out.println(beanName);
         }
         System.out.println("Done printing beans");
-        
+
         MyTool t = appCtx.getBean(MyTool.class);
         t.run();
     }
