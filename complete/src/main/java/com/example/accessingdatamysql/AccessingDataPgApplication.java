@@ -14,6 +14,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.jdbc.DatabaseDriver;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 // these next two are redundant until we kill @SpringBootApplication
@@ -28,7 +29,7 @@ public class AccessingDataPgApplication {
         dbUrl = dotenv.get("DB_URL");
         // SpringApplication.run(AccessingDataPgApplication.class, args);
 
-        AnnotationConfigApplicationContext appCtx = new AnnotationConfigApplicationContext(AccessingDataPgApplication.class);
+        ApplicationContext appCtx = new AnnotationConfigApplicationContext(AccessingDataPgApplication.class);
         for (String beanName : appCtx.getBeanDefinitionNames()) {
             System.out.println(beanName);
         }
