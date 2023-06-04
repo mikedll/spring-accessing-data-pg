@@ -39,13 +39,9 @@ public class AccessingDataPgApplication {
     }
 
     @Bean
-		DataSource dataSource() {
-
-        String driverClassName = DatabaseDriver.fromJdbcUrl(dbUrl).getDriverClassName();
-        
+		DataSource dataSource() {        
         HikariDataSource dataSource = DataSourceBuilder.create()
             .type(HikariDataSource.class)
-            .driverClassName(driverClassName)
             .url(dbUrl)
             .build();
 				dataSource.setPoolName("default");
