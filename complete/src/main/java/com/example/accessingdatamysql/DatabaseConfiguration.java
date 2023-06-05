@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.transaction.PlatformTransactionMan
 import org.springframework.boot.autoconfigure.transaction.TransactionProperties;
 
 @Configuration(proxyBeanMethods = false)
-public class JpaConfiguration {
+public class DatabaseConfiguration {
     
     @Bean
     TransactionManager transactionManager(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
