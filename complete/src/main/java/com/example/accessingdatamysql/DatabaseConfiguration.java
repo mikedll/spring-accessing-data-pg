@@ -22,15 +22,6 @@ public class DatabaseConfiguration {
     @Bean
     public TransactionManagerCustomizers
         platformTransactionManagerCustomizers(ObjectProvider<PlatformTransactionManagerCustomizer<?>> customizers) {
-
-        System.out.println("**************************************************");
-        System.out.println("Mike's platformTransactionManagerCustomizers bean");
-        Object something = customizers.getIfAvailable();
-        if(something != null) {
-            System.out.println("Got something");
-            System.out.println(something);
-        }
-        
         return new TransactionManagerCustomizers(customizers.orderedStream().toList());
     }
 
