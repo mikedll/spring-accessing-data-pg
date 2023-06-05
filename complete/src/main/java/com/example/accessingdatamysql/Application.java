@@ -15,8 +15,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.ApplicationContext;
+import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {TransactionAutoConfiguration.class})
 // these next two are redundant until we kill @SpringBootApplication
 @ComponentScan
 @Configuration
@@ -27,13 +28,13 @@ public class Application {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
         dbUrl = dotenv.get("DB_URL");
-        // SpringApplication.run(Application.class, args);
+        ApplicationContext appCtx = SpringApplication.run(Application.class, args);
 
-        ApplicationContext appCtx = new AnnotationConfigApplicationContext(Application.class);
-        for (String beanName : appCtx.getBeanDefinitionNames()) {
-            System.out.println(beanName);
-        }
-        System.out.println("Done printing beans");
+        // ApplicationContext appCtx = new AnnotationConfigApplicationContext(Application.class);
+        // for (String beanName : appCtx.getBeanDefinitionNames()) {
+        //     System.out.println(beanName);
+        // }
+        // System.out.println("Done printing beans");
 
         MyTool t = appCtx.getBean(MyTool.class);
         t.run();
