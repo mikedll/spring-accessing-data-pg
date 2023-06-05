@@ -16,20 +16,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.ApplicationContext;
 
-@SpringBootApplication
+// @SpringBootApplication
 // these next two are redundant until we kill @SpringBootApplication
 @ComponentScan
 @Configuration
-public class AccessingDataPgApplication {
-
+public class Application {
+    
     private static String dbUrl;
     
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
         dbUrl = dotenv.get("DB_URL");
-        // SpringApplication.run(AccessingDataPgApplication.class, args);
+        // SpringApplication.run(Application.class, args);
 
-        ApplicationContext appCtx = new AnnotationConfigApplicationContext(AccessingDataPgApplication.class);
+        ApplicationContext appCtx = new AnnotationConfigApplicationContext(Application.class);
         for (String beanName : appCtx.getBeanDefinitionNames()) {
             System.out.println(beanName);
         }
