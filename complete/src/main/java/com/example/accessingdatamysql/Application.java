@@ -15,8 +15,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.orm.jpa.JpaTransactionManager;
 
-// @SpringBootApplication
+@SpringBootApplication
 // these next two are redundant until we kill @SpringBootApplication
 @ComponentScan
 @Configuration
@@ -38,7 +42,7 @@ public class Application {
         MyTool t = appCtx.getBean(MyTool.class);
         t.run();
     }
-
+    
     @Bean
 		DataSource dataSource() {        
         HikariDataSource dataSource = DataSourceBuilder.create()
@@ -48,5 +52,11 @@ public class Application {
 				dataSource.setPoolName("default");
         return dataSource;
 		}
-    
+
+    @Bean
+    TransactionManager transactionManager(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManagerCustomizers.ifAvailable((customizers) -> customizers.customize(transactionManager));
+        return transactionManager;
+    }
 }
