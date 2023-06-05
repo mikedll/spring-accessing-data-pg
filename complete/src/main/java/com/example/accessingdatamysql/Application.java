@@ -15,10 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.TransactionManager;
-import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.orm.jpa.JpaTransactionManager;
 
 @SpringBootApplication
 // these next two are redundant until we kill @SpringBootApplication
@@ -53,10 +49,4 @@ public class Application {
         return dataSource;
 		}
 
-    @Bean
-    TransactionManager transactionManager(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManagerCustomizers.ifAvailable((customizers) -> customizers.customize(transactionManager));
-        return transactionManager;
-    }
 }
