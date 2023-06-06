@@ -1,29 +1,21 @@
 package com.example.accessingdatamysql;
 
-import javax.sql.DataSource;
-
 import io.github.cdimascio.dotenv.Dotenv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 
-@SpringBootApplication(exclude = {TransactionAutoConfiguration.class})
+@SpringBootApplication(exclude = {TransactionAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
 // these next two are redundant until we kill @SpringBootApplication
 @ComponentScan
-@Configuration
 public class Application {
     
-    private static String dbUrl;
+    public static String dbUrl;
     
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
@@ -39,15 +31,4 @@ public class Application {
         MyTool t = appCtx.getBean(MyTool.class);
         t.run();
     }
-    
-    @Bean
-		DataSource dataSource() {        
-        HikariDataSource dataSource = DataSourceBuilder.create()
-            .type(HikariDataSource.class)
-            .url(dbUrl)
-            .build();
-				dataSource.setPoolName("default");
-        return dataSource;
-		}
-
 }
