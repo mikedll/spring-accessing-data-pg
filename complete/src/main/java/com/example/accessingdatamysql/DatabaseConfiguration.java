@@ -1,5 +1,7 @@
 package com.example.accessingdatamysql;
 
+import java.lang.StackTraceElement;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,9 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 
 import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.boot.autoconfigure.transaction.PlatformTransactionManagerCustomizer;
@@ -45,5 +50,13 @@ public class DatabaseConfiguration {
             .build();
 				dataSource.setPoolName("default");
         return dataSource;
-		}    
+		}
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+    		AbstractJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setShowSql(true);
+        return adapter;
+    }
+
 }

@@ -32,4 +32,5 @@ public class Application {
         MyTool t = appCtx.getBean(MyTool.class);
         t.run();
     }
+
 }
