@@ -12,8 +12,9 @@ import org.springframework.boot.autoconfigure.transaction.PlatformTransactionMan
 import org.springframework.boot.autoconfigure.transaction.TransactionProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-
+@EnableJpaRepositories
 @Configuration
 public class DatabaseConfiguration {
     
