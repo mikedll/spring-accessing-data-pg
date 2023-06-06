@@ -4,6 +4,7 @@ import java.lang.StackTraceElement;
 
 import javax.sql.DataSource;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.TransactionManager;
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.boot.autoconfigure.transaction.PlatformTransactionManagerCustomizer;
@@ -58,5 +60,19 @@ public class DatabaseConfiguration {
         adapter.setShowSql(true);
         return adapter;
     }
+
+    // @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(ResourceLoader resourceLoader,
+                                                                       DataSource dataSource,
+                                                                       JpaVendorAdapter jpaVendorAdapter) {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setPackagesToScan(new String[] {"com.example.accessingdatamysql"});
+
+        return entityManagerFactoryBean;
+    }
+
 
 }
