@@ -5,14 +5,15 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.TransactionManager;
-import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.boot.autoconfigure.transaction.PlatformTransactionManagerCustomizer;
 import org.springframework.boot.autoconfigure.transaction.TransactionProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
 @Configuration
